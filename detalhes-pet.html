@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="estilo.css">
 </head>
+
 <body class="pagina-detalhes">
 
 
@@ -17,13 +19,13 @@
             <a href="encontrar-pets.html">
                 <img class="logomarca" src="./Assets/doapetz-branco.png" alt="Logo DoaPetz">
             </a>
-           
+
             <div class="perfil-cabecalho-detalhes">
                 <div class="info-usuario">
                     <img src="./Assets/Keth.jpeg" alt="Foto do Usuário" class="foto-perfil">
                     <div class="dados-usuario">
                         <span class="nome-usuario">Kethzinha</span>
-                        <span class="localizacao"><i class="fa-solid fa-location-dot"></i> São Caetano, São Paulo</span>
+                        <span class="localizacao"><i class="fa-solid fa-location-dot"></i> São Caetano do Sul, São Paulo</span>
                     </div>
                 </div>
 
@@ -47,22 +49,23 @@
 
     <main class="corpo-detalhe-pet">
         <div class="card-detalhe-container">
-           
+
             <!-- Adicionamos um ID (imagem-pet) para o JavaScript conseguir trocar a foto -->
             <div class="detalhe-imagem">
-                <img src="./Assets/luna2.webp" alt="Foto do Pet" id="imagem-pet">
+                <img src="./Assets/luna.png" alt="Foto do Pet" id="imagem-pet">
             </div>
 
 
             <div class="detalhe-info">
                 <!-- Adicionamos um ID (nome-pet) para o JavaScript trocar o título -->
                 <h1 class="nome-pet-titulo" id="nome-pet">Luna</h1>
-               
+
                 <!-- Adicionamos um ID (descricao-pet) para o JavaScript trocar o texto -->
                 <p class="descricao-pet-texto" id="descricao-pet">
-                    Luna é uma gata encantadora, com pelo preto e branco, olhos verdes hipnotizantes e uma personalidade cativante. Ela é afetuosa, brincalhona e uma caçadora habilidosa.
+                    Luna é uma gata encantadora, com pelo preto e branco, olhos verdes hipnotizantes e uma personalidade
+                    cativante. Ela é afetuosa, brincalhona e uma caçadora habilidosa.
                 </p>
-               
+
                 <div class="botoes-acao-pet">
                     <button class="btn-ver-mais" id="btn-ver-mais">Ver Mais</button>
                     <button class="btn-adotar" id="btn-adotar">Adotar</button>
@@ -83,4 +86,65 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const parametros = new URLSearchParams(window.location.search)
+            const nomeDoPet = parametros.get("nome")
+            const fotoDoPet = parametros.get("foto")
+            const descricoesPets = {
+                "DORYS":" Dorys é uma Yorkshire Terrier de 7 anos, muito carinhosa e companheira. Adora receber atenção e estar perto de quem ama.",
+                "PINGO":" Pingo é um hamster de 3 meses, pequeno, fofo e muito curioso. Adora explorar e brincar em seu espaço.",
+                "SID": "Sid é um bicho-preguiça de 8 anos, tranquilo e sossegado. Adora passar o dia descansando e aproveitar momentos de paz.",
+                "PIMPOLHO": "Pimpolho é um Golden Retriever de 1 ano, alegre e brincalhão. Adora correr, brincar e fazer amizade com todo mundo.",  
+                "SPOT":" Spot é um Labrador de 8 anos, muito dócil e amigável. Adora correr no parque e é super paciente com crianças.",
+                "LUNA":"Luna é uma gata Bengal de 11 meses, extremamente curiosa e cheia de energia. Adora brincar com bolinhas de corda e explorar tudo ao seu redor",
+                "PIPOCA": "Pipoca é uma raposa-do-deserto de 4 anos, esperta e curiosa. Adora explorar novos lugares e descobrir coisas diferentes.",
+                "NÉVOA": "Névoa é uma víbora azul de 7 anos, tranquila e fascinante. Gosta de ambientes calmos e de passar seu tempo explorando.",  
+                "AURORA": "Aurora é uma jiboia-arco-íris de 6 anos, tranquila e encantadora. Adora ficar em seu espaço e explorar seu ambiente.",
+                "BAUNILHA":"Baunilha é uma furão de 2 anos, curiosa e brincalhona. Adora explorar e se divertir com diferentes brinquedos.",
+                "FAÍSCA": "Faísca é uma tarântula de 10 anos, tranquila e interessante. Prefere ambientes calmos e gosta de explorar no seu próprio ritmo.",
+                "KIKA": "Kika é uma sagui de 3 meses, pequena, curiosa e cheia de energia. Adora explorar e observar tudo ao seu redor.",
+            }
 
+            if (nomeDoPet) {
+                const tituloH1 = document.getElementById("nome-pet");
+                if (tituloH1) {
+                    tituloH1.innerText = nomeDoPet;
+                }
+
+                const textoDescricao = document.getElementById("descricao-pet")
+                if (textoDescricao) {
+                    const nomeMaiusculo = nomeDoPet.toUpperCase();
+                    if (descricoesPets[nomeMaiusculo]) {
+                        textoDescricao.innerText = descricoesPets[nomeMaiusculo];
+                    } else {
+                        textoDescricao.innerText = nomeDoPet + "é um amiguinho muito especial à procura de um lar!"
+                    }
+                }
+            }
+
+            if (fotoDoPet) {
+                const imagemTag = document.getElementById("imagem-pet")
+                if (imagemTag) {
+                    imagemTag.src = fotoDoPet
+                }
+            }
+            const btnAdotar = document.getElementById('btn-adotar')
+            const btnVerMais = document.getElementById('btn-ver-mais')
+
+
+            if (btnAdotar) {
+                btnAdotar.addEventListener('click', function () {
+         alert('Parabéns! Sua solicitação de adoção foi iniciada. Entraremos em contato! 🐾')
+                })
+            }
+            if (btnVerMais) {
+                btnVerMais.addEventListener('click', function () {
+    alert('Aqui você pode exibir informações adicionais de saúde, vacinas e histórico do pet!')
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>
